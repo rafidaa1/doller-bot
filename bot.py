@@ -19,7 +19,9 @@ def send_welcome(message):
     btn_profile = types.KeyboardButton('👥 MY PROFILE')
     btn_deposit = types.KeyboardButton('💳 DEPOSIT')
     btn_support = types.KeyboardButton('👨‍💻 SUPPORT')
-    markup.add(btn_profile, btn_deposit, btn_support)
+    btn_Buy = types.KeyboardButton('💸 Buy')
+    btn_Sell = types.KeyboardButton('💰 Sell')
+    markup.add(btn_profile, btn_deposit, btn_support, btn_Buy, btn_Sell)
 
     welcome_text = (
         "🎂 Welcome to Dollar Buy Sell Bot!\n"
