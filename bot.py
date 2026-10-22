@@ -77,5 +77,6 @@ t = threading.Thread(target=run_web)
 t.start()
 
 # বট অনবরত চালু রাখা
-if name == 'main':
+
+if __name__ == 'main':
     bot.polling(none_stop=True, skip_pending=True)
