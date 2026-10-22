@@ -75,3 +75,7 @@ def run_web():
 # ব্যাকগ্রাউন্ডে ফ্লাস্ক সার্ভার চালু রাখা
 t = threading.Thread(target=run_web)
 t.start()
+
+# বট অনবরত চালু রাখা
+if name == 'main':
+    bot.polling(none_stop=True, skip_pending=True)
