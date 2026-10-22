@@ -52,6 +52,16 @@ def handle_buttons(message):
         bot.send_message(message.chat.id, profile_text)
 
     elif message.text == '💳 DEPOSIT':
+        markup = telebot.types.InlineKeyboardMarkup(row_width=2)
+        
+        btn_bkash = telebot.types.InlineKeyboardButton('📱 বিকাশ', callback_data='pay_bkash')
+        btn_nagad = telebot.types.InlineKeyboardButton('📱 নগদ', callback_data='pay_nagad')
+        btn_binance = telebot.types.InlineKeyboardButton('📱 বিনান্স', callback_data='pay_binance')
+        
+        markup.add(btn_bkash, btn_nagad, btn_binance)
+        bot.send_message(message.chat.id, "💳 ডিপোজিট করার জন্য নিচে থেকে আপনার পেমেন্ট মেথড সিলেক্ট করুন:", reply_markup=markup)
+
+    elif message.text == '💳 DEPOSIT':
         bot.send_message(message.chat.id, "💳 ডিপোজিট করতে অনুগ্রহ করে নিচের মাধ্যমে পেমেন্ট সম্পন্ন করুন:")
 
     elif message.text == '👨‍💻 SUPPORT':
@@ -77,6 +87,20 @@ t = threading.Thread(target=run_web)
 t.start()
 
 # বট অনবরত চালু রাখা
+
+@bot.callback_query_handler(func=lambda call: call.data.startswith('pay_'))
+def payment_method_selected(call):
+    method = call.data.split('_')[1]
+    
+    if method == 'bkash':
+        text = "📱 বিকাশ পার্সোনাল নম্বর: 01XXXXXXXXX\n\nউপরে দেওয়া নম্বরে ক্যাশ ইন বা সেন্ড মানি করে আপনার Transaction ID টি পাঠান।"
+    elif method == 'nagad':
+        text = "📱 নগদ পার্সোনাল নম্বর: 01XXXXXXXXX\n\nউপরে দেওয়া নম্বরে সেন্ড মানি করে আপনার Transaction ID টি পাঠান।"
+    elif method == 'rocket':
+        text = "📱 রকেট পার্সোনাল নম্বর: 01XXXXXXXXX\n\nউপরে দেওয়া নম্বরে সেন্ড মানি করে আপনার Transaction ID টি পাঠান।"
+        
+    bot.answer_callback_query(call.id)
+    bot.send_message(call.message.chat.id, text, parse_mode="Markdown")
 
 if __name__ == '__main__':
     bot.polling(none_stop=True, skip_pending=True)
