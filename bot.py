@@ -2,7 +2,7 @@ import telebot
 from telebot import types
 
 TOKEN = '8970123408:AAFAL8CviT6c-eoh8Fi5kmSp-rQucq58cW0'
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(ADMIN_CHAT_ID = "7902496579")
 
 # ডামি ব্যালেন্স ডিকশনারি
 user_balances = {}
@@ -16,11 +16,13 @@ def send_welcome(message):
 
     # মেনু বাটন তৈরি
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    btn_Buy = types.KeyboardButton('💸 Buy')
+    btn_Sell = types.KeyboardButton('💰 Sell')
     btn_profile = types.KeyboardButton('👥 MY PROFILE')
     btn_deposit = types.KeyboardButton('💳 DEPOSIT')
     btn_support = types.KeyboardButton('👨‍💻 SUPPORT')
-    btn_Buy = types.KeyboardButton('💸 Buy')
-    btn_Sell = types.KeyboardButton('💰 Sell')
+   
+    
     markup.add(btn_profile, btn_deposit, btn_support, btn_Buy, btn_Sell)
 
     welcome_text = (
@@ -54,7 +56,7 @@ def handle_buttons(message):
         bot.send_message(message.chat.id, profile_text)
 
     elif message.text == '💳 DEPOSIT':
-        markup = telebot.types.InlineKeyboardMarkup(row_width=2)
+        markup = telebot.types.InlineKeyboardMarkup(row_width=)
         
         btn_bkash = telebot.types.InlineKeyboardButton('📱 বিকাশ', callback_data='pay_bkash')
         btn_nagad = telebot.types.InlineKeyboardButton('📱 নগদ', callback_data='pay_nagad')
