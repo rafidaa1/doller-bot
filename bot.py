@@ -63,7 +63,7 @@ import os
 from flask import Flask
 import threading
 
-app = Flask('')
+app = Flask('__name__')
 
 @app.route('/')
 def home():
@@ -78,5 +78,5 @@ t.start()
 
 # বট অনবরত চালু রাখা
 
-if __name__ == 'main':
+if __name__ == '__main__':
     bot.polling(none_stop=True, skip_pending=True)
